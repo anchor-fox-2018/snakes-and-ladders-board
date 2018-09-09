@@ -20,15 +20,28 @@ function board(size) {
             columnReverse.push(result[i][j]);
         }
     }
+    function reverseArr(input) {
+        var ret = new Array;
+        for (var i = input.length - 1; i >= 0; i--) {
+            ret.push(input[i]);
+        }
+        return ret;
+    }
     // balikdari 64,63,62 ... ke bentuk array
     let buffer = [];
     for (let i = 0, k = -1; i < columnReverse.length; i++) {
-        if (i % size ===0) {
+        if (i % size === 0) {
             k++;
             buffer[k] = [];
+            if (k !== 0 && k % 2 !== 0 && buffer[k - 1].length === 8) {
+                console.log(`${k}revert here`);
+                let reverse = reverseArr(buffer[k - 1]);
+                buffer[k - 1] = reverse;
+            }
         }
         buffer[k].push(columnReverse[i]);
     }
+
     return buffer;
 }
-console.log(board(8));
+console.log(board(10));
